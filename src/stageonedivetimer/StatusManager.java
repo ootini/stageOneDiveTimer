@@ -15,6 +15,7 @@ public class StatusManager {
          public String getStatus(){
          status = "Diving";
          return status;
+         
      }
     
 }

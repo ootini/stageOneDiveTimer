@@ -16,17 +16,15 @@ public class StageOneDiveTimer {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-
+        
+        StatusManager newstatusManager = new StatusManager();
+        String diveStatus = newstatusManager.getStatus();
+        
         //Instantiate the depth gauge
         DepthGauge newDepthGauge = new DepthGauge();
 
         //Instantiate the stop watch
         Timer newTimer = new Timer();
-
-
-
-        StatusManager newstatusManager = new StatusManager();
-        String diveStatus = newstatusManager.getStatus();
         
         LogToFile newLogFile = new LogToFile();
         newLogFile.openFile();
@@ -44,10 +42,11 @@ public class StageOneDiveTimer {
                 newLogFile.writeFile(diveData);
                 try {
                     Thread.sleep(1000); // Sleep for 1 sec 
-                } catch (InterruptedException e) {
-                }             
-                
+                } 
+                catch (InterruptedException e) {
+                    
+                }               
             }
         }
-    }newLogFile.closeFile();
+    }
 }
