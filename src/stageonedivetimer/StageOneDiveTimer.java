@@ -33,22 +33,21 @@ public class StageOneDiveTimer {
         while (diveStatus.equals("Diving")) {
             
             boolean writing = true;
-            
-            String timeData = newTimer.getTimeElapsed();
-            double depthData = newDepthGauge.getCurrentDepth();
-            
-            String diveData = "Time Stamp: " + timeData + "\n" + "Depth: " + depthData;
-            
+
             while (writing){
+                String timeData = newTimer.getTimeElapsed();
+                double depthData = newDepthGauge.getCurrentDepth();
+
+                String diveData = "Time Stamp: " + timeData + "\n" + "Depth: " + depthData;
                             
                 //System.out.println(diveData);
                 newLogFile.writeFile(diveData);
                 try {
                     Thread.sleep(1000); // Sleep for 1 sec 
                 } catch (InterruptedException e) {
-                } 
+                }             
+                
             }
-            newLogFile.closeFile();
         }
-    }
+    }newLogFile.closeFile();
 }
