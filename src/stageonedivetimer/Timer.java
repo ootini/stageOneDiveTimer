@@ -4,8 +4,6 @@
  */
 package stageonedivetimer;
 
-
-
 /**
  *
  * @author dave
