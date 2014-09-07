@@ -26,9 +26,10 @@ public class Timer implements Runnable{
         long elapsedTime = System.currentTimeMillis() - startTime;
         elapsedTime = elapsedTime / 1000;
         
-        String seconds = Integer.toString((int)(elapsedTime %60));
-        String minutes = Integer.toString((int)((elapsedTime)/3600)/60);
-        String hours = Integer.toString((int)((elapsedTime)/3600));
+        //System.out.println(elapsedTime);
+        String seconds = Integer.toString((int)(elapsedTime % 60));
+        String minutes = Integer.toString((int)(elapsedTime / (60)) % 60);
+        String hours = Integer.toString((int)((elapsedTime)/600));
         
         if (seconds.length()<2)
             seconds = "0" + seconds;
