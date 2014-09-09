@@ -48,12 +48,7 @@ public class Timer implements Runnable{
             
             String diveTime = getTimeElapsed();
             //System.out.println(diveTime);
-            
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
+
         }
     }    
 }

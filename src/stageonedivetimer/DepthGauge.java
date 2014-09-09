@@ -9,8 +9,11 @@ public class DepthGauge implements Runnable {
     Thread myThread;
     //This array is some fake data that would be collected from the depth sensor.
     final double[] depthArray1 = {3.00, 5.00, 7.00, 10.00, 12.00, 15.00, 14.00, 12.00, 11.00, 8.00, 3.00};
+    //Instantiate status Manager
+    StatusManager newstatusManager;
 
-    public DepthGauge() {
+    public DepthGauge(StatusManager newstatusManager) {
+        this.newstatusManager = newstatusManager;
         this.myThread = new Thread(this);
         this.myThread.start();
     }
@@ -81,10 +84,12 @@ public class DepthGauge implements Runnable {
 
     @Override
     public void run() {
-        StatusManager newstatusManager = new StatusManager();
-        String diveStatus = newstatusManager.getStatus();
         
-        while (diveStatus.equals("Diving")) {
+        while(newstatusManager.getStatus().equals(StatusManager.NOT_DIVING)){
+            //System.out.println("Depth Gauge waiting");
+        }
+        
+        while (newstatusManager.getStatus().equals(StatusManager.DIVING)) {
             sampleDepthInDive();
             try {
                 Thread.sleep(10000); // Sleep for 1 sec 
@@ -92,5 +97,6 @@ public class DepthGauge implements Runnable {
             }
 
         }
+
     }
 }

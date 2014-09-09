@@ -10,12 +10,16 @@ package stageonedivetimer;
  */
 public class StatusManager {
     
+    public static final String NOT_DIVING = "Not Diving";
+    public static final String DIVING = "Diving";
+    
          String status;
-    
-         public String getStatus(){
-         status = "Diving";
-         return status;
          
-     }
+         public StatusManager (){
+             this.status=NOT_DIVING;
+         }
     
+    public String getStatus() {
+        return status;
+    }   
 }

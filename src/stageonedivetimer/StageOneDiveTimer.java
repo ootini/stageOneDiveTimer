@@ -17,50 +17,52 @@ public class StageOneDiveTimer {
      */
     public static void main(String[] args) throws IOException {
         
+        //Instantiate status Manager
         StatusManager newstatusManager = new StatusManager();
-        String diveStatus = newstatusManager.getStatus();
+        
+        
+        //Instantiate main Display
+        MainDisplay newMainDisplay = new MainDisplay(newstatusManager);
+        newMainDisplay.setVisible(true);
+        
+        
         
         //Instantiate the depth gauge
-        DepthGauge newDepthGauge = new DepthGauge();
+        DepthGauge newDepthGauge = new DepthGauge(newstatusManager);
 
         //Instantiate the stop watch
         Timer newTimer = new Timer();
         
         //Instantiate logging facility
-        
         LogToFile newLogFile = new LogToFile();
         newLogFile.openFile();
+        // x is just a counter, it's only used when running simulated data.
         int x = 0;
 
+        while(newstatusManager.getStatus().equals(StatusManager.NOT_DIVING))
+        {
+            //System.out.println("Waiting");
+        }
+        while (newstatusManager.getStatus().equals(StatusManager.DIVING)) {
+            if (x < 11) {
+                String timeData = newTimer.getTimeElapsed();
+                //System.out.println(timeData);
 
-        while (diveStatus.equals("Diving")) {
-            
-            
-            boolean writing = true;
+                double depthData = newDepthGauge.depthArray1[x];
+                //System.out.println(x);
 
-            while (writing){
-                if (x < 11) {
-                    String timeData = newTimer.getTimeElapsed();
-                    //System.out.println(timeData);
+                String diveData = "Time Stamp: " + timeData + "\n" + "Depth: " + depthData + "\n";
 
-                    double depthData = newDepthGauge.depthArray1[x];
-                    //System.out.println(x);
-
-                    String diveData = "Time Stamp: " + timeData + "\n" + "Depth: " + depthData + "\n";
-
-                    System.out.println(diveData);
-                    newLogFile.writeFile(diveData);
-                    try {
-                        Thread.sleep(1000); // Sleep for 1 sec 
-                    } 
-                    catch (InterruptedException e) {
-                    }
-                    x++;
-                } 
-                else {
-                    newLogFile.closeFile();
+                System.out.println(diveData);
+                newLogFile.writeFile(diveData);
+                try {
+                    Thread.sleep(1000); // Sleep for 1 sec 
+                } catch (InterruptedException e) {
                 }
+                x++;
+            } else {
+                newLogFile.closeFile();
             }
-        }       
+        }
     }
 }
