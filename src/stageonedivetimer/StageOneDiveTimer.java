@@ -42,6 +42,10 @@ public class StageOneDiveTimer {
         while(newstatusManager.getStatus().equals(StatusManager.NOT_DIVING))
         {
             //System.out.println("Waiting");
+                        try {
+                Thread.sleep(100); // Sleep for 1 sec 
+            } catch (InterruptedException e) {
+            }
         }
         while (newstatusManager.getStatus().equals(StatusManager.DIVING)) {
             if (x < 11) {

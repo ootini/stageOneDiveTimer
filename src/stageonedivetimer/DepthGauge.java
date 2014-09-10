@@ -87,6 +87,10 @@ public class DepthGauge implements Runnable {
         
         while(newstatusManager.getStatus().equals(StatusManager.NOT_DIVING)){
             //System.out.println("Depth Gauge waiting");
+                        try {
+                Thread.sleep(100); // Sleep for 1 sec 
+            } catch (InterruptedException e) {
+            }
         }
         
         while (newstatusManager.getStatus().equals(StatusManager.DIVING)) {
